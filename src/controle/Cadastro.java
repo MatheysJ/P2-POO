@@ -219,9 +219,7 @@ public class Cadastro {
             rs = st.executeQuery();
             
             if (rs.next()) {
-                genero = new Genero();
-                genero.setIdGenero(rs.getInt("idGenero"));
-                genero.setDescricao(rs.getString("descricao"));
+                genero = new Genero(rs.getInt("idGenero"), rs.getString("descricao"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Genero.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,9 +240,7 @@ public class Cadastro {
             rs = st.executeQuery();
             
             if (rs.next()) {
-                genero = new Genero();
-                genero.setIdGenero(rs.getInt("idGenero"));
-                genero.setDescricao(rs.getString("descricao"));
+                genero = new Genero(rs.getInt("idGenero"), rs.getString("descricao"));
                 lista.add(genero);
             }
         } catch (SQLException ex) {
@@ -265,6 +261,11 @@ public class Cadastro {
                             "(descricao) " + 
                             "values (?)",
                     PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(i++, genero.getDescricao());
+            
+            st.execute();
+            
+            System.out.println("oie");
             
         } catch (SQLException ex) {
             Logger.getLogger(Genero.class.getName()).log(Level.SEVERE, null, ex);

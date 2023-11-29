@@ -27,7 +27,7 @@ public class Conexao {
         }
         
         try {
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/data-base", "user", "senha");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/fatec", "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);            
         }

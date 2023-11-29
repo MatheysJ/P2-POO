@@ -18,15 +18,21 @@ import javax.swing.DefaultComboBoxModel;
 public class Principal extends javax.swing.JFrame {
     
     private Controle controle = new Controle();
+    private LinkedList<Genero> listaGenero = new LinkedList<>();
     
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        cmbGenero.setModel(new DefaultComboBoxModel(controle.consultarGeneros().toArray()));
+        updateGeneros();
     }
 
+    private void updateGeneros () {
+        listaGenero.addAll(controle.consultarGeneros());
+        cmbGenero.setModel(new DefaultComboBoxModel(listaGenero.toArray()));
+    }
+    
     private boolean areFieldsValid () {
         String titulo = inpTitulo.getText();
         String ano = inpAno.getText();
@@ -47,6 +53,14 @@ public class Principal extends javax.swing.JFrame {
         return false;
     }
 
+    private void openAddGenero () {
+        new AdicionarGenero().setVisible(true);
+    }
+    
+    private void openListaFilmes () {
+        new ListaFilmes().setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +96,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cadastroTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cadastroTitle.setText("CADASTRO DE FILMES");
@@ -233,7 +247,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_inpPaisActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
         
         if (areFieldsValid()) {
             System.out.println("Campos válidos :D");
@@ -244,11 +257,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCriarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarGeneroActionPerformed
-        // TODO add your handling code here:
+        openAddGenero();
     }//GEN-LAST:event_btnCriarGeneroActionPerformed
 
     private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
-        // TODO add your handling code here:
+        openListaFilmes();
     }//GEN-LAST:event_btnListaActionPerformed
 
     /**

@@ -13,7 +13,16 @@ public class Genero {
     private int idGenero;
     
     private String descricao;
-
+    
+    public Genero (String descricao) {
+        this.descricao = descricao;
+    }
+    
+    public Genero (int idGenero, String descricao) {
+        this.idGenero = idGenero;
+        this.descricao = descricao;
+    }
+    
     /**
      * @return the idGenero
      */

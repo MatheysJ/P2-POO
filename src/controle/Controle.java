@@ -5,6 +5,7 @@
 package controle;
 
 import entidades.Comentario;
+import entidades.Genero;
 import java.util.List;
 
 /**
@@ -21,6 +22,10 @@ public class Controle {
         } else {
             cadastro.atualizarComentario(comentario);
         }
+    }
+    
+    public void salvarGenero(Genero genero) {
+        cadastro.salvarGenero(genero);
     }
     
     public List consultarComentarios() {

@@ -39,7 +39,7 @@ public class ListaFilmes extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(326, 476));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

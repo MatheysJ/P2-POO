@@ -5,19 +5,50 @@
  */
 package janelas;
 
+import controle.Controle;
+import entidades.Genero;
+
 /**
  *
  * @author fatec
  */
 public class AdicionarGenero extends javax.swing.JFrame {
-
+    private Controle controle = new Controle();
+    String descricao;
+    
     /**
      * Creates new form AdicionarGenero
      */
     public AdicionarGenero() {
         initComponents();
+        defineFields();
+    }
+    
+    private void createGenero () {
+        Genero genero = new Genero(descricao);
+        
+        controle.salvarGenero(genero);
+    }
+    
+    private void defineFields () {
+        descricao = inpDescricao.getText();
     }
 
+    private boolean areFieldsValid () {
+        String[] allFields = {descricao};
+        
+        return !anyEmpty(allFields);
+    }
+    
+    private boolean anyEmpty (String[] texts) {
+        for (String text: texts) {
+            if (text.equals("")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +63,7 @@ public class AdicionarGenero extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         inpDescricao = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnCadastrarGenero.setText("CADASTRAR");
         btnCadastrarGenero.addActionListener(new java.awt.event.ActionListener() {
@@ -58,17 +89,14 @@ public class AdicionarGenero extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(0, 233, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inpDescricao)
-                            .addComponent(btnCadastrarGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(generoTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(inpDescricao)
+                    .addComponent(btnCadastrarGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(generoTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -89,7 +117,7 @@ public class AdicionarGenero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGeneroActionPerformed
-        // TODO add your handling code here:
+        createGenero();
     }//GEN-LAST:event_btnCadastrarGeneroActionPerformed
 
     private void inpDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpDescricaoActionPerformed
