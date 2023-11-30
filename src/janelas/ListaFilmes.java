@@ -5,17 +5,32 @@
  */
 package janelas;
 
+import controle.Controle;
+import entidades.Filme;
+import java.util.LinkedList;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author fatec
  */
 public class ListaFilmes extends javax.swing.JFrame {
+    
+    private Controle controle = new Controle();
+    private LinkedList<Filme> listaFilmes = new LinkedList<>();
 
     /**
      * Creates new form ListaFilmes
      */
     public ListaFilmes() {
         initComponents();
+        updateFilmes();
+    }
+    
+    private void updateFilmes () {
+        listaFilmes.clear();
+        listaFilmes.addAll(controle.consultarFilmes());
+        cmbFilmes.setModel(new DefaultComboBoxModel(listaFilmes.toArray()));
     }
 
     /**
@@ -28,9 +43,9 @@ public class ListaFilmes extends javax.swing.JFrame {
     private void initComponents() {
 
         btnCriarGenero = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbFilmes = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        btnCriarGenero1 = new javax.swing.JButton();
+        btnComentar = new javax.swing.JButton();
 
         btnCriarGenero.setText("CRIAR GÊNERO");
         btnCriarGenero.addActionListener(new java.awt.event.ActionListener() {
@@ -45,10 +60,10 @@ public class ListaFilmes extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Selecione um filme");
 
-        btnCriarGenero1.setText("COMENTAR");
-        btnCriarGenero1.addActionListener(new java.awt.event.ActionListener() {
+        btnComentar.setText("COMENTAR");
+        btnComentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCriarGenero1ActionPerformed(evt);
+                btnComentarActionPerformed(evt);
             }
         });
 
@@ -59,9 +74,9 @@ public class ListaFilmes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbFilmes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                    .addComponent(btnCriarGenero1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnComentar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -70,9 +85,9 @@ public class ListaFilmes extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
                 .addGap(38, 38, 38)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbFilmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
-                .addComponent(btnCriarGenero1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnComentar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -83,9 +98,12 @@ public class ListaFilmes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCriarGeneroActionPerformed
 
-    private void btnCriarGenero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarGenero1ActionPerformed
+    private void btnComentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCriarGenero1ActionPerformed
+        Filme selectedFilme = (Filme) cmbFilmes.getSelectedItem();
+        AdicionarComentario adicionarComentario = new AdicionarComentario(selectedFilme);
+        adicionarComentario.setVisible(true);
+    }//GEN-LAST:event_btnComentarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,9 +141,9 @@ public class ListaFilmes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComentar;
     private javax.swing.JButton btnCriarGenero;
-    private javax.swing.JButton btnCriarGenero1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbFilmes;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

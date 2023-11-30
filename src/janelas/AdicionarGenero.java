@@ -14,27 +14,23 @@ import entidades.Genero;
  */
 public class AdicionarGenero extends javax.swing.JFrame {
     private Controle controle = new Controle();
-    String descricao;
     
     /**
      * Creates new form AdicionarGenero
      */
     public AdicionarGenero() {
         initComponents();
-        defineFields();
     }
     
     private void createGenero () {
+        String descricao = inpDescricao.getText();
         Genero genero = new Genero(descricao);
         
         controle.salvarGenero(genero);
     }
     
-    private void defineFields () {
-        descricao = inpDescricao.getText();
-    }
-
     private boolean areFieldsValid () {
+        String descricao = inpDescricao.getText();
         String[] allFields = {descricao};
         
         return !anyEmpty(allFields);
@@ -47,6 +43,11 @@ public class AdicionarGenero extends javax.swing.JFrame {
             }
         }
         return false;
+    }
+    
+    private void closeWindow () {
+        setVisible(false);
+        dispose();
     }
     
     /**
@@ -117,7 +118,10 @@ public class AdicionarGenero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGeneroActionPerformed
-        createGenero();
+        if (areFieldsValid()) {
+            createGenero();
+            closeWindow();
+        }
     }//GEN-LAST:event_btnCadastrarGeneroActionPerformed
 
     private void inpDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpDescricaoActionPerformed

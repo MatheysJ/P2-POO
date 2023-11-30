@@ -5,6 +5,7 @@
 package controle;
 
 import entidades.Comentario;
+import entidades.Filme;
 import entidades.Genero;
 import java.util.List;
 
@@ -26,6 +27,10 @@ public class Controle {
     
     public void salvarGenero(Genero genero) {
         cadastro.salvarGenero(genero);
+    }
+    
+    public void salvarFilme (Filme filme) {
+        cadastro.salvarFilme (filme);
     }
     
     public List consultarComentarios() {

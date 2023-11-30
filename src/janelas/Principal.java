@@ -8,6 +8,8 @@ package janelas;
 import controle.Controle;
 import entidades.Filme;
 import entidades.Genero;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.LinkedList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -26,9 +28,11 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         updateGeneros();
+        handleGenerosComboBoxFocus();
     }
-
+    
     private void updateGeneros () {
+        listaGenero.clear();
         listaGenero.addAll(controle.consultarGeneros());
         cmbGenero.setModel(new DefaultComboBoxModel(listaGenero.toArray()));
     }
@@ -59,6 +63,42 @@ public class Principal extends javax.swing.JFrame {
     
     private void openListaFilmes () {
         new ListaFilmes().setVisible(true);
+    }
+    
+    private void handleGenerosComboBoxFocus () {
+        cmbGenero.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                updateGeneros();
+                cmbGenero.showPopup();   
+            }
+        });
+    }
+    
+    public void handleCadastrarFilme () {
+        createFilme();
+        clearFields();
+    }
+    
+    public void clearFields () {
+        inpTitulo.setText("");
+        inpAno.setText("");
+        inpDiretor.setText("");
+        inpPais.setText("");
+    }
+    
+    public void createFilme () {
+        String titulo = inpTitulo.getText();
+        String ano = inpAno.getText();
+        String diretor = inpDiretor.getText();
+        String pais = inpPais.getText();
+        Genero selectedGenero = (Genero)cmbGenero.getSelectedItem();
+        int genero = selectedGenero.getIdGenero();
+        
+        Filme filme = new Filme(titulo, ano, diretor, pais, genero);
+        
+        controle.salvarFilme(filme);
     }
     
     /**
@@ -249,7 +289,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         
         if (areFieldsValid()) {
-            System.out.println("Campos válidos :D");
+            handleCadastrarFilme();
         } else {
             System.out.println("Campos inválidos D:");
         }

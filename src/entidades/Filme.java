@@ -19,7 +19,27 @@ public class Filme {
     private String diretor;
     
     private String pais;
-
+    
+    private int genero;
+    
+    
+    public Filme (int idFilme, String titulo, String ano, String diretor, String pais, int genero) {
+        this.idFilme = idFilme;
+        this.titulo = titulo;
+        this.ano = ano;
+        this.diretor = diretor;
+        this.pais = pais;
+        this.genero = genero;
+    }
+    
+    public Filme (String titulo, String ano, String diretor, String pais, int genero) {
+        this.titulo = titulo;
+        this.ano = ano;
+        this.diretor = diretor;
+        this.pais = pais;
+        this.genero = genero;
+    }
+    
     /**
      * @return the idFilme
      */
@@ -88,6 +108,25 @@ public class Filme {
      */
     public void setPais(String pais) {
         this.pais = pais;
+    }
+    
+    /**
+     * @return the genero
+     */
+    public int getGenero() {
+        return genero;
+    }
+
+    /**
+     * @param genero the genero to set
+     */
+    public void setGenero(int genero) {
+        this.genero = genero;
+    }
+    
+    @Override
+    public String toString () {
+        return getTitulo();
     }
     
     

@@ -17,6 +17,23 @@ public class Comentario {
     private double nota;
     
     private String usuario;
+    
+    private int filme;
+    
+    public Comentario (int idComentario, String comentario, double nota, String usuario, int filme) {
+        this.idComentario = idComentario;
+        this.comentario = comentario;
+        this.nota = nota;
+        this.usuario = usuario;
+        this.filme = filme;
+    }
+    
+    public Comentario (String comentario, double nota, String usuario, int filme) {
+        this.comentario = comentario;
+        this.nota = nota;
+        this.usuario = usuario;
+        this.filme = filme;
+    }
 
     /**
      * @return the idComentario
@@ -72,6 +89,20 @@ public class Comentario {
      */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+    
+    /**
+     * @return the filme
+     */
+    public int getFilme() {
+        return filme;
+    }
+
+    /**
+     * @param filme the filme to set
+     */
+    public void setFilme(int filme) {
+        this.filme = filme;
     }
     
     

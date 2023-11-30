@@ -51,5 +51,10 @@ public class Genero {
         this.descricao = descricao;
     }
     
+    @Override
+    public String toString () { 
+        return getDescricao();
+    }
+    
     
 }

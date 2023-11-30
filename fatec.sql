@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Nov-2023 às 01:23
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 8.0.12
+-- Generation Time: Nov 30, 2023 at 02:12 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `fatec`
+-- Database: `fatec`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `comentario`
+-- Table structure for table `comentario`
 --
 
 CREATE TABLE `comentario` (
@@ -33,12 +33,12 @@ CREATE TABLE `comentario` (
   `nota` double NOT NULL,
   `usuario` varchar(80) NOT NULL,
   `filme` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `filme`
+-- Table structure for table `filme`
 --
 
 CREATE TABLE `filme` (
@@ -48,55 +48,77 @@ CREATE TABLE `filme` (
   `diretor` varchar(80) NOT NULL,
   `pais` varchar(20) NOT NULL,
   `genero` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `genero`
+-- Table structure for table `genero`
 --
 
 CREATE TABLE `genero` (
   `idGenero` int(11) NOT NULL,
   `descricao` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `comentario`
+-- Indexes for table `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`idComentario`),
   ADD KEY `filme` (`filme`);
 
 --
--- Índices para tabela `filme`
+-- Indexes for table `filme`
 --
 ALTER TABLE `filme`
   ADD PRIMARY KEY (`idFilme`),
   ADD KEY `genero` (`genero`);
 
 --
--- Índices para tabela `genero`
+-- Indexes for table `genero`
 --
 ALTER TABLE `genero`
   ADD PRIMARY KEY (`idGenero`);
 
 --
--- Restrições para despejos de tabelas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Limitadores para a tabela `comentario`
+-- AUTO_INCREMENT for table `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `filme`
+--
+ALTER TABLE `filme`
+  MODIFY `idFilme` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comentario`
 --
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`filme`) REFERENCES `filme` (`idFilme`);
 
 --
--- Limitadores para a tabela `filme`
+-- Constraints for table `filme`
 --
 ALTER TABLE `filme`
   ADD CONSTRAINT `filme_ibfk_1` FOREIGN KEY (`genero`) REFERENCES `genero` (`idGenero`);

@@ -5,17 +5,67 @@
  */
 package janelas;
 
+import controle.Controle;
+import entidades.Comentario;
+import entidades.Filme;
+
 /**
  *
  * @author fatec
  */
 public class AdicionarComentario extends javax.swing.JFrame {
-
+    
+    private Controle controle = new Controle();
+    Filme selectedFilme;
+    
     /**
      * Creates new form AdicionarComentario
      */
-    public AdicionarComentario() {
+    public AdicionarComentario(Filme filme) {
         initComponents();
+        
+        selectedFilme = filme;
+        
+        changePageName();
+    }
+    
+    private void changePageName () {
+        txtNomeFilme.setText(selectedFilme.getTitulo());
+    }
+    
+    private boolean areFieldsValid () {
+        String comentario = inpComentario.getText();
+        String nota = inpNota.getText();
+        String usuario = inpUsuario.getText();
+        
+        String[] allFields = {comentario, nota, usuario};
+        
+        return !anyEmpty(allFields);
+    }
+    
+    private boolean anyEmpty (String[] texts) {
+        for (String text: texts) {
+            if (text.equals("")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void createComentario () {
+        String comentarioText = inpComentario.getText();
+        Double nota = Double.valueOf(inpNota.getText());
+        String usuario = inpUsuario.getText();
+        int filme = selectedFilme.getIdFilme();
+        
+        Comentario comentario = new Comentario(comentarioText, nota, usuario, filme);
+        
+        controle.salvarComentario(comentario);
+    }
+    
+    private void closeWindow () {
+        setVisible(false);
+        dispose();
     }
 
     /**
@@ -28,10 +78,10 @@ public class AdicionarComentario extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        inpDiretor = new javax.swing.JTextField();
-        inpAno = new javax.swing.JTextField();
+        inpNota = new javax.swing.JTextField();
+        inpComentario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        inpPais = new javax.swing.JTextField();
+        inpUsuario = new javax.swing.JTextField();
         btnComentar = new javax.swing.JButton();
         cadastroTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -41,26 +91,26 @@ public class AdicionarComentario extends javax.swing.JFrame {
 
         jLabel4.setText("Nota");
 
-        inpDiretor.setToolTipText("Insira o diretor do filme");
-        inpDiretor.addActionListener(new java.awt.event.ActionListener() {
+        inpNota.setToolTipText("Insira o diretor do filme");
+        inpNota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpDiretorActionPerformed(evt);
+                inpNotaActionPerformed(evt);
             }
         });
 
-        inpAno.setToolTipText("Insira o ano do filme");
-        inpAno.addActionListener(new java.awt.event.ActionListener() {
+        inpComentario.setToolTipText("Insira o ano do filme");
+        inpComentario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpAnoActionPerformed(evt);
+                inpComentarioActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Usuario");
 
-        inpPais.setToolTipText("Insira o país do filme");
-        inpPais.addActionListener(new java.awt.event.ActionListener() {
+        inpUsuario.setToolTipText("Insira o país do filme");
+        inpUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpPaisActionPerformed(evt);
+                inpUsuarioActionPerformed(evt);
             }
         });
 
@@ -87,9 +137,9 @@ public class AdicionarComentario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNomeFilme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inpAno, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inpDiretor, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inpPais, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inpComentario, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inpNota, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inpUsuario, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnComentar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cadastroTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -110,15 +160,15 @@ public class AdicionarComentario extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inpAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inpComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inpDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inpNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inpPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inpUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
                 .addComponent(btnComentar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -127,20 +177,24 @@ public class AdicionarComentario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inpDiretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpDiretorActionPerformed
+    private void inpNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpNotaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inpDiretorActionPerformed
+    }//GEN-LAST:event_inpNotaActionPerformed
 
-    private void inpAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpAnoActionPerformed
+    private void inpComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpComentarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inpAnoActionPerformed
+    }//GEN-LAST:event_inpComentarioActionPerformed
 
-    private void inpPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpPaisActionPerformed
+    private void inpUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inpPaisActionPerformed
+    }//GEN-LAST:event_inpUsuarioActionPerformed
 
     private void btnComentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComentarActionPerformed
         // TODO add your handling code here:
+        if (areFieldsValid()) {
+            createComentario();
+            closeWindow();
+        }
     }//GEN-LAST:event_btnComentarActionPerformed
 
     /**
@@ -173,7 +227,7 @@ public class AdicionarComentario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdicionarComentario().setVisible(true);
+                new AdicionarComentario(null).setVisible(true);
             }
         });
     }
@@ -181,9 +235,9 @@ public class AdicionarComentario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComentar;
     private javax.swing.JLabel cadastroTitle;
-    private javax.swing.JTextField inpAno;
-    private javax.swing.JTextField inpDiretor;
-    private javax.swing.JTextField inpPais;
+    private javax.swing.JTextField inpComentario;
+    private javax.swing.JTextField inpNota;
+    private javax.swing.JTextField inpUsuario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

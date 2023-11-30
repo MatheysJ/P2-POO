@@ -27,9 +27,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="txtNomeFilme" max="32767" attributes="0"/>
-                  <Component id="inpAno" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inpDiretor" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inpPais" alignment="0" max="32767" attributes="0"/>
+                  <Component id="inpComentario" alignment="0" max="32767" attributes="0"/>
+                  <Component id="inpNota" alignment="0" max="32767" attributes="0"/>
+                  <Component id="inpUsuario" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnComentar" alignment="0" max="32767" attributes="0"/>
                   <Component id="cadastroTitle" alignment="0" pref="302" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -55,15 +55,15 @@
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="inpAno" min="-2" max="-2" attributes="0"/>
+              <Component id="inpComentario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="inpDiretor" min="-2" max="-2" attributes="0"/>
+              <Component id="inpNota" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="inpPais" min="-2" max="-2" attributes="0"/>
+              <Component id="inpUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               <Component id="btnComentar" min="-2" pref="44" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -77,20 +77,20 @@
         <Property name="text" type="java.lang.String" value="Nota"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inpDiretor">
+    <Component class="javax.swing.JTextField" name="inpNota">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Insira o diretor do filme"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpDiretorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpNotaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="inpAno">
+    <Component class="javax.swing.JTextField" name="inpComentario">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Insira o ano do filme"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpAnoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpComentarioActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -98,12 +98,12 @@
         <Property name="text" type="java.lang.String" value="Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inpPais">
+    <Component class="javax.swing.JTextField" name="inpUsuario">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Insira o pa&#xed;s do filme"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpPaisActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpUsuarioActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnComentar">

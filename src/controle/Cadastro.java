@@ -34,11 +34,13 @@ public class Cadastro {
             rs = st.executeQuery();
             
             if (rs.next()) {
-                comentario = new Comentario();
-                comentario.setIdComentario(rs.getInt("idComentario"));
-                comentario.setComentario(rs.getString("comentario"));
-                comentario.setNota(rs.getDouble("notaComentario"));
-                comentario.setUsuario(rs.getString("usuarioComentario"));                
+                comentario = new Comentario(
+                        rs.getInt("idComentario"), 
+                        rs.getString("comentario"), 
+                        rs.getDouble("notaComentario"), 
+                        rs.getString("usuarioComentario"),
+                        rs.getInt("filme")
+                );                
             }
         } catch (SQLException ex) {
             Logger.getLogger(Comentario.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,12 +60,14 @@ public class Cadastro {
             
             rs = st.executeQuery();
             
-            if (rs.next()) {
-                comentario = new Comentario();
-                comentario.setIdComentario(rs.getInt("idComentario"));
-                comentario.setComentario(rs.getString("comentario"));
-                comentario.setNota(rs.getDouble("notaComentario"));
-                comentario.setUsuario(rs.getString("usuarioComentario"));                
+            while (rs.next()) {
+                comentario = new Comentario(
+                        rs.getInt("idComentario"), 
+                        rs.getString("comentario"), 
+                        rs.getDouble("nota"), 
+                        rs.getString("usuario"),
+                        rs.getInt("filme")
+                );
                 lista.add(comentario);
             }
         } catch (SQLException ex) {
@@ -81,9 +85,15 @@ public class Cadastro {
         try {
             st = conexao.getConexao().prepareStatement(
                     "insert into comentario " + 
-                            "(comentario, notaComentario, usuarioComentario) " + 
-                            "values (?,?,?)",
+                            "(comentario, nota, usuario, filme) " + 
+                            "values (?,?,?,?)",
                     PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(i++, comentario.getComentario());
+            st.setDouble(i++, comentario.getNota());
+            st.setString(i++, comentario.getUsuario());
+            st.setInt(i++, comentario.getFilme());
+            
+            st.execute();
             
         } catch (SQLException ex) {
             Logger.getLogger(Comentario.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,11 +108,14 @@ public class Cadastro {
         try {
             st = conexao.getConexao().prepareStatement(
                     "update comentario set " + 
-                            "comentario = ?, notaComentario = ?, usuarioComentario = ? " + 
+                            "comentario = ?, nota = ?, usuario = ?, filme = ? " + 
                             "where idComentario = ?");
             st.setString(i++, comentario.getComentario());
             st.setDouble(i++, comentario.getNota());
             st.setString(i++, comentario.getUsuario());
+            st.setInt(i++, comentario.getFilme());
+            
+            st.setInt(i++, comentario.getIdComentario());
             
             st.execute();
             
@@ -125,12 +138,13 @@ public class Cadastro {
             rs = st.executeQuery();
             
             if (rs.next()) {
-                filme = new Filme();
-                filme.setIdFilme(rs.getInt("idFilme"));
-                filme.setTitulo(rs.getString("titulo"));
-                filme.setAno(rs.getString("ano"));
-                filme.setDiretor(rs.getString("diretor"));
-                filme.setPais(rs.getString("pais"));
+                int idFilme = rs.getInt("idFilme");
+                String titulo = rs.getString("titulo");
+                String ano = rs.getString("ano");
+                String diretor = rs.getString("diretor");
+                String pais = rs.getString("pais");
+                int genero = rs.getInt("genero");
+                filme = new Filme(idFilme, titulo, ano, diretor, pais, genero);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Filme.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,13 +164,14 @@ public class Cadastro {
             
             rs = st.executeQuery();
             
-            if (rs.next()) {
-                filme = new Filme();
-                filme.setIdFilme(rs.getInt("idFilme"));
-                filme.setTitulo(rs.getString("titulo"));
-                filme.setAno(rs.getString("ano"));
-                filme.setDiretor(rs.getString("diretor"));
-                filme.setPais(rs.getString("pais"));                
+            while (rs.next()) {               
+                int idFilme = rs.getInt("idFilme");
+                String titulo = rs.getString("titulo");
+                String ano = rs.getString("ano");
+                String diretor = rs.getString("diretor");
+                String pais = rs.getString("pais");
+                int genero = rs.getInt("genero");
+                filme = new Filme(idFilme, titulo, ano, diretor, pais, genero);
                 lista.add(filme);
             }
         } catch (SQLException ex) {
@@ -174,9 +189,16 @@ public class Cadastro {
         try {
             st = conexao.getConexao().prepareStatement(
                     "insert into filme " + 
-                            "(titulo, ano, diretor, pais) " + 
-                            "values (?,?,?,?)",
+                            "(titulo, ano, diretor, pais, genero) " + 
+                            "values (?,?,?,?,?)",
                     PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(i++, filme.getTitulo());
+            st.setString(i++, filme.getAno());
+            st.setString(i++, filme.getDiretor());
+            st.setString(i++, filme.getPais());
+            st.setInt(i++, filme.getGenero());
+            
+            st.execute();
             
         } catch (SQLException ex) {
             Logger.getLogger(Filme.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,12 +213,14 @@ public class Cadastro {
         try {
             st = conexao.getConexao().prepareStatement(
                     "update filme set " + 
-                            "titulo = ?, ano = ?, diretor = ?, pais = ? " + 
+                            "titulo = ?, ano = ?, diretor = ?, pais = ?, genero = ? " + 
                             "where idFilme = ?");
             st.setString(i++, filme.getTitulo());
             st.setString(i++, filme.getAno());
             st.setString(i++, filme.getDiretor());
-            st.setString(i++, filme.getPais());            
+            st.setString(i++, filme.getPais());
+            st.setInt(i++, filme.getGenero());
+            st.setInt(i++, filme.getIdFilme());            
             
             st.execute();
             
@@ -239,7 +263,7 @@ public class Cadastro {
             
             rs = st.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 genero = new Genero(rs.getInt("idGenero"), rs.getString("descricao"));
                 lista.add(genero);
             }
@@ -264,8 +288,6 @@ public class Cadastro {
             st.setString(i++, genero.getDescricao());
             
             st.execute();
-            
-            System.out.println("oie");
             
         } catch (SQLException ex) {
             Logger.getLogger(Genero.class.getName()).log(Level.SEVERE, null, ex);
